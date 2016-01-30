@@ -1,4 +1,4 @@
-# membershipManager
+# Card Game
 
 **Generated from HotTowel Angular**
 

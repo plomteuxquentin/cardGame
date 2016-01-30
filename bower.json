@@ -1,7 +1,7 @@
 {
-  "name": "membershipManager",
+  "name": "Card Game",
   "version": "0.0.1",
-  "description": "membershipManager",
+  "description": "un jeu de carte",
   "authors": [],
   "license": "MIT",
   "ignore": [

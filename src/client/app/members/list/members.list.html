@@ -4,22 +4,9 @@
     <a class="md-button md-fab" href="mailto:{{vm.getMails()}}">
       <md-icon md-svg-icon="mail"></md-icon>
     </a>
-    <a class="md-button md-fab" href="sms:{{vm.getSMS()}}">
-      <md-icon md-svg-icon="sms"></md-icon>
-    </a>
   </div>
 
   <div class="action-bar" ng-show="vm.displayActions"  flex layout="row" layout-align="end center">
-    <md-button class="md-fab" ui-sref="seances({id:''})" aria-label="add a seances">
-      <md-icon md-svg-icon="addSeance"></md-icon>
-    </md-button>
-    <md-button class="md-fab" ui-sref="sessions.edit({id:''})" aria-label="add a session">
-      <md-icon md-svg-icon="addSession"></md-icon>
-    </md-button>
-    <md-button class="md-fab" ui-sref="members.edit({id: ''})" aria-label="add a member">
-      <md-icon md-svg-icon="addMember"></md-icon>
-    </md-button>
-
     <md-button class="md-fab" ng-click="vm.displayActions=false" aria-label="filter members">
       <md-icon md-svg-icon="search"></md-icon>
     </md-button>
@@ -47,7 +34,6 @@
             <span flex="20">{{member.seanceLeft}}</span>
           </p>
           <div hide-xs flex layout="row" layout-align="space-around center">
-            <md-icon flex md-svg-icon="addSeance" class="member-list__icon" ui-sref="seances({id: member._id})" ng-click="$event.stopPropagation()"></md-icon>
             <md-icon flex md-svg-icon="mail" class="member-list__icon"></md-icon>
             <md-icon flex md-svg-icon="edit" ui-sref="members.edit({id: member.id})" class="member-list__icon"></md-icon>
           </div>

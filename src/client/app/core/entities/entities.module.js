@@ -52,11 +52,6 @@
 
         console.log('create member : ');
         console.log(newEntity);
-      } else if (entityType === 'sessions') {
-        newEntity = createSession(newEntity.date, newEntity.participants, newEntity.nbrSubscribers);
-
-        console.log('create session : ');
-        console.log(newEntity);
       }
 
       store[entityType].push(newEntity);
@@ -117,10 +112,6 @@
 
       response = [200, entity];
 
-      if (entityType === 'sessions') {
-        entity.participants = (filter('orderBy')(entity.participants, 'name'));
-      }
-
       console.log('request ' + entityType + '/' + id + ' : ');
       console.log(entity);
 
@@ -135,21 +126,9 @@
           category: 'ADMIN',
           title: 'Member creation'
         },
-        CREATE_SESSION: {
-          category: 'SESSION',
-          title: 'Session of close-combat'
-        },
-        UPDATE_SESSION: {
-          category: 'ADMIN',
-          title: 'Session updated'
-        },
         UPDATE_MEMBER: {
           category: 'ADMIN',
           title: 'Member updated'
-        },
-        BUY_SEANCE: {
-          category: 'BUY',
-          title: 'Seances bought'
         }
       };
 
@@ -162,33 +141,6 @@
       store.events.push(event);
     }
 
-    function createSession(date, participants, nbrsubscribers) {
-      var session = {
-        _id: generateId(),
-        date: date,
-        participants: participants,
-        nbrSubscribers: nbrsubscribers
-      };
-
-      var participantsID = participants.map(function (participant) {
-        return participant._id;
-      });
-
-      //update seance members
-      session.participants = [];
-
-      store.members.forEach(function(member) {
-        if (participantsID.indexOf(member._id) !== -1) {
-          member.seanceLeft--;
-          session.participants.push(member);
-        }
-      });
-
-      logEvent('CREATE_SESSION',session.participants, session.date);
-
-      return session;
-    }
-
     function createMember(newMember) {
       newMember._id = generateId();
       newMember.name = newMember.firstName + ' ' + newMember.lastName;
@@ -196,18 +148,6 @@
 
       logEvent('CREATE_MEMBER', [newMember]);
       return newMember;
-    }
-
-    function buySeance(participant, nbrSeance, date) {
-      var entity = store.members.find(function(entity) {
-        return participant._id === entity._id;
-      });
-
-      // TODO handle not found
-
-      entity.seanceLeft += nbrSeance;
-
-      logEvent('BUY_SEANCE', [entity], date);
     }
 
     function storeMocks() {
@@ -268,66 +208,15 @@
           phone: '+32 0474 55 63 30'
         }
       ];
-      // 4 sessions
-      var sessions = [
-        {
-          date: new Date('2015/06/23'),
-          participants: [],
-          nbrSubscribers: 6
-        },
-        {
-          date: new Date('2015/06/30'),
-          participants: [],
-          nbrSubscribers: 6
-        },
-        {
-          date: new Date('2015/09/01'),
-          participants: [],
-          nbrSubscribers: 6
-        },
-        {
-          date: new Date('2015/09/07'),
-          participants: [],
-          nbrSubscribers: 6
-        }
-      ];
 
-      var member, session;
+      var card
+
+      var member;
 
       // Create members & add seances
       members.forEach(function(_member) {
         member = createMember(_member);
         store.members.push(member);
-        buySeance(member, 5, member.date);
-      });
-
-      // Populate session with members
-      sessions[0].participants.push(store.members[0]);
-      sessions[0].participants.push(store.members[1]);
-      sessions[0].participants.push(store.members[2]);
-      sessions[0].participants.push(store.members[3]);
-
-      sessions[1].participants.push(store.members[0]);
-      sessions[1].participants.push(store.members[2]);
-      sessions[1].participants.push(store.members[3]);
-      sessions[1].participants.push(store.members[4]);
-      sessions[1].participants.push(store.members[5]);
-
-      sessions[2].participants.push(store.members[0]);
-      sessions[2].participants.push(store.members[1]);
-      sessions[2].participants.push(store.members[2]);
-      sessions[2].participants.push(store.members[3]);
-      sessions[2].participants.push(store.members[5]);
-      sessions[2].participants.push(store.members[4]);
-
-      sessions[3].participants.push(store.members[3]);
-      sessions[3].participants.push(store.members[4]);
-      sessions[3].participants.push(store.members[5]);
-
-      // Create sessions
-      sessions.forEach(function(session) {
-        session = createSession(session.date, session.participants, 6);
-        store.sessions.push(session);
       });
     }
 

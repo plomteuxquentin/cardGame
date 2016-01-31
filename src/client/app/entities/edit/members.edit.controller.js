@@ -105,7 +105,7 @@
       dialogOptions = {
         controller: 'MembersPictureDialogController',
         controllerAs: 'pictureDialogCtrl',
-        templateUrl: 'app/members/edit/pictureDialog/pictureDialog.html',
+        templateUrl: '..//edit/pictureDialog/pictureDialog.html',
         parent: angular.element(document.body),
         openFrom: 'pictureButton',
         closeFrom: 'pictureButton',

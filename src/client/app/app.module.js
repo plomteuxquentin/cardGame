@@ -9,9 +9,7 @@
     'app.journal',
     'app.home',
     'app.settings',
-    'app.members',
-    'app.members.details',
-    'app.members.edit',
-    'app.members.list'
+    'app.entities',
+    'app.entities.list'
   ]);
 })();

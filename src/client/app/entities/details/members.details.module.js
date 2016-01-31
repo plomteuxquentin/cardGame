@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.members.edit', ['app.core', 'app.widgets'])
+    .module('app.members.details', ['app.core', 'app.widgets'])
     .run(appRun);
 
   appRun.$inject = ['routerHelper'];
@@ -15,13 +15,13 @@
   function getStates() {
     return [
       {
-        state: 'members.edit',
+        state: 'members.details',
         config: {
-          url: ':id/edit',
-          templateUrl: 'app/members/edit/members.edit.html',
-          controller: 'MembersEditController',
+          url: '/details/:id',
+          templateUrl: '..//details/members.details.html',
+          controller: 'MembersDetailsController',
           controllerAs: 'vm',
-          title: 'members edition'
+          title: 'members details'
         }
       }
     ];

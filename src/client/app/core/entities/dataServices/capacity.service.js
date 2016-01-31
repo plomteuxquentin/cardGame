@@ -3,12 +3,12 @@
 
   angular
     .module('app.core.entities')
-    .factory('sessionsFactory', sessionsFactory);
+    .factory('CapacitiesFactory', CapacitiesFactory);
 
-  sessionsFactory.$inject = ['$resource'];
+  CapacitiesFactory.$inject = ['$resource'];
   /* @ngInject */
-  function sessionsFactory(resourceService) {
-    var URL = '/api/sessions/:id';
+  function CapacitiesFactory(resourceService) {
+    var URL = '/api/capacities/:id';
     var ID = '@_id';
 
     var service = resourceService(URL, {

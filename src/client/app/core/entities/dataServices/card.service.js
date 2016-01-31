@@ -3,12 +3,12 @@
 
   angular
     .module('app.core.entities')
-    .factory('membersFactory', membersFactory);
+    .factory('CardsFactory', CardsFactory);
 
-  membersFactory.$inject = ['$resource'];
+  CardsFactory.$inject = ['$resource'];
   /* @ngInject */
-  function membersFactory(resourceService) {
-    var URL = '/api/members/:id';
+  function CardsFactory(resourceService) {
+    var URL = '/api/cards/:id';
     var ID = '@_id';
 
     var service = resourceService(URL, {

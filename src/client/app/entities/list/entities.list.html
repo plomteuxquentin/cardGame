@@ -1,0 +1,58 @@
+<div class="action-bar" flex layout="row" layout-align="space-between">
+  <div class="action-bar" ng-show="vm.displayActions"  flex layout="row" layout-align="end center">
+    <md-button class="md-fab" ng-click="vm.displayActions=false" aria-label="filter entities">
+      <md-icon md-svg-icon="search"></md-icon>
+    </md-button>
+  </div>
+</div>
+
+<div layout="row" ng-if="!vm.displayActions" flex>
+  <md-input-container flex>
+    <md-icon class="search__input-contrainer__icon" md-svg-icon="clear" ng-click="vm.displayActions=true"></md-icon>
+    <label>Search    </label>
+    <input ng-model="vm.search" title="filter entities" auto-focus ng-keydown="vm.removeOnBackspace($event)">
+  </md-input-container>
+</div>
+
+<md-card>
+  <md-card-content>
+    <md-list>
+      <md-list-item
+          ng-repeat="sphere in vm.spheres| filter:{$:vm.search}" class="member-list__item">
+          <p flex layout="row" layout-align="space-between" class="member-list__name">
+            <span>{{sphere.name}}</span>
+            <span>{{sphere.description}}</span>
+            <span>{{sphere.color}}</span>
+          </p>
+        <md-divider md-inset></md-divider>
+      </md-list-item>
+    </md-list>
+
+    <md-list>
+      <md-list-item
+          ng-repeat="capacity in vm.capacities | filter:{$:vm.search}" class="member-list__item">
+          <p flex layout="row" layout-align="space-between" class="member-list__name">
+            <span>{{capacity.name}}</span>
+            <span>{{capacity.description}}</span>
+            <span>{{capacity.sphere.name}}</span>
+          </p>
+        <md-divider md-inset></md-divider>
+      </md-list-item>
+    </md-list>
+
+    <md-list>
+      <md-list-item
+          ng-repeat="card in vm.cards | filter:{$:vm.search}" class="member-list__item">
+          <p flex layout="row" layout-align="space-between" class="member-list__name">
+            <span>{{card.avatar}}</span>
+            <span>{{card.name}}</span>
+            <span>{{card.description}}</span>
+            <span ng-repeat="sphere in card.spheres">{{sphere.name}} </span>
+            <span ng-repeat="capacity in card.capacities">{{capacity.name}} </span>
+          </p>
+        <md-divider md-inset></md-divider>
+      </md-list-item>
+    </md-list>
+
+  </md-card-content>
+</md-card>
